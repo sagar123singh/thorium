@@ -1,6 +1,111 @@
 const express = require('express');
 const router = express.Router();
 
+
+
+
+    let players =
+   [
+       {
+           "name": "sagar",
+           "dob": "1/1/1998",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+        "name": "manish",
+        "dob": "1/1/1997",
+        "gender": "male",
+        "city": "jalandhar",
+        "sports": [
+            "swimming"
+        ]
+    },
+    {
+        "name": "ajay",
+        "dob": "1/1/2000",
+        "gender": "male",
+        "city": "jalandhar",
+        "sports": [
+            "swimming"
+        ]
+    },
+    {
+        "name": "sunny",
+        "dob": "1/1/1999",
+        "gender": "male",
+        "city": "jalandhar",
+        "sports": [
+            "swimming"
+        ]
+    },
+   ]
+
+
+   router.post('/players', function(req,res){
+
+    let player =req.body;
+    let playerName = player.name
+    for(let i=0;i<players.length;i++){
+        if (players[i].name == playerName){
+            res.send('player already exits')
+        }
+    }
+    players.push(player);
+    console.log("player details",players);
+    res.send(players)
+});
+
+router.post('/players/:playerName/bookings/:bookingId', function(req,res){
+        let name = req.params.playerName
+        let isPlayerPresent = false
+
+        for(let i=0; i<players.length;i++){
+            if(players[i].name == name){
+                isPlayerPresent =true
+            }
+        }
+            if(!isPlayerPresent){
+               res.send('player are not being found')
+             }
+
+            //  let booking =req.body
+            //  let bookingId =req.params.bookingId
+            //  for(let i=0;i<players.length;i++) {
+            //      if(players[i].name == name) {
+            //          for (let j = 0; j<players[i].bookings.length;j++) {
+            //              if (players[i].bookings[j].bookingNumber == bookingId){
+            //                  return res.send ('booking with this id is a already present for the player')
+            //              }
+            //          }
+            //          players[i].bookings.push(booking)
+            //      }
+            //  }
+        res.send('players are present')
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
@@ -30,8 +135,6 @@ router.get("/test-api-3" , function(req, res) {
 router.get("/test-api-4" , function(req, res) {
     res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
 })
-
-
 
 router.get("/test-api-5" , function(req, res) {
     res.send("hi FunctionUp5. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
@@ -71,3 +174,4 @@ router.post("/test-post-4", function(req, res) {
 })
 
 module.exports = router;
+
