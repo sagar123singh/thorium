@@ -23,7 +23,8 @@ router.post('/createBook', bookController.createBook);
 // // router.get('/getBook', booksController.getBook)
 router.post('/createPublisher', publisherController.createPublisher)
 router.get('/getBooks',  bookController.getBooks  );
-
+router.put('/books',  bookController.books  );
+router.put('/updateBooks',  bookController.updateBooks  );
 
 
 module.exports = router;

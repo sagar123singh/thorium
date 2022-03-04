@@ -1,14 +1,23 @@
 const mongoose = require('mongoose');
+const { stringify } = require('nodemon/lib/utils');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
-const bookSchema = new mongoose.Schema( {
+const bookSchema =  mongoose.Schema( {
     name: String,
-    author_id: {
+    Author: {
         type: ObjectId,
         ref: "Author"
     },
     price: Number,
-    ratings: Number
+    ratings: Number,
+    Publisher: {
+        type: ObjectId,
+        ref: "Publisher"
+    },
+    isHardCover: {
+        type:Boolean,
+        default: false
+    }
 
 
 }, { timestamps: true });

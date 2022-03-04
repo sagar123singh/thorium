@@ -4,11 +4,29 @@ const bookModel= require("../models/bookModel")
 const publisherModel = require("../models/publisherModel")
 
 
-// const createBook= async function (req, res) {
-//     let book = req.body
-//     let bookCreated = await bookModel.create(book)
-//     res.send({data: bookCreated})
-// }
+const createBook= async function (req, res) {
+    let book = req.body
+    let bookCreated = await bookModel.create(book)
+    res.send({data: bookCreated})
+}
+
+const books = async function(req,res){
+    let nBooks= await bookModel.findOneAndUpdate(
+        {publisher:"6220652fe525fb82b82d391",publisher:"622065efe525fb82b82d3922"},
+        {$set:{isHardCover:true}},
+        {new:true}
+    )
+    res.send({data:nBooks})
+}
+const updateBooks = async function (req,res){
+    let uBooks = await bookModel.updateMany(
+        {rating:{gt:3.5}},
+        {$set:{price:10}},
+        {new:true}
+    )
+    res.send({data:uBooks})
+}
+
 
 // const getBooksData= async function (req, res) {
 //     let books = await bookModel.find()
@@ -21,28 +39,28 @@ const publisherModel = require("../models/publisherModel")
 
 // }
 
-const createBook= async function (req, res) {
-    let book = req.body
-    let authorId = book.author
-    let publisherId = book.publisher
+// const createBook= async function (req, res) {
+//     let book = req.body
+//     let authorId = book.author
+//     let publisherId = book.publisher
 
-    // 1
-    if(!authorId) return res.send('The request is not valid as the author details are required.')
+//     // 1
+//     if(!authorId) return res.send('The request is not valid as the author details are required.')
 
-    // 2
-    let author = await authorModel.findById(authorId)
-    if(!author) return res.send('The request is not valid as no author is present with the given author id')
+//     // 2
+//     let author = await authorModel.findById(authorId)
+//     if(!author) return res.send('The request is not valid as no author is present with the given author id')
 
-    // 3
-    if(!publisherId) return res.send('The request is not valid as the publisher details are required.') 
+//     // 3
+//     if(!publisherId) return res.send('The request is not valid as the publisher details are required.') 
 
-    // 4
-    let publisher = await publisherModel.findById(publisherId)
-    if(!publisher) return res.send('The request is not valid as no publisher is present with the given publisher id')
+//     // 4
+//     let publisher = await publisherModel.findById(publisherId)
+//     if(!publisher) return res.send('The request is not valid as no publisher is present with the given publisher id')
 
-    let bookCreated = await bookModel.create(book)
-    return res.send({data: bookCreated})
-}
+//     let bookCreated = await bookModel.create(book)
+//     return res.send({data: bookCreated})
+// }
 
 
 
@@ -57,3 +75,5 @@ module.exports.createBook= createBook
 module.exports.getBooks=getBooks
 // module.exports.getBooksData= getBooksData
 // module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
+module.exports.books= books
+module.exports.updateBooks=updateBooks
