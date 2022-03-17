@@ -9,6 +9,8 @@ const blogController = require ('../controllers/blogController')
 
 router.post("/Authors" ,authorController.createAuthor )
 
+//autherlogin
+
 router.post('/login',authorController.loginAuthor);
 
 router.post('/blogs', middleware.middle1, blogController.Blogs)
@@ -21,9 +23,9 @@ router.put('/blogs/:blogId', middleware.middle1, middleware.middle2, blogControl
 
 router.delete('/blogs/:blogId', middleware.middle1, middleware.middle2, blogController.deleting)
 
-router.delete('/blogs/:deletedBlogs',middleware.middle1,middleware.middle2, middleware.autherQuery, blogController.deletedBlogs)
+router.delete('/blogs/:deletedBlogs',middleware.middle1,middleware.middle2,  blogController.deletedBlogs)
 
-//autherlogin
+      
 
 
 
